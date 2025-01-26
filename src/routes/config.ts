@@ -6,6 +6,7 @@ import {
 import {
   getGroqApiKey,
   getOllamaApiEndpoint,
+  getLMStudioApiEndpoint,
   getAnthropicApiKey,
   getGeminiApiKey,
   getOpenaiApiKey,
@@ -51,6 +52,7 @@ router.get('/', async (_, res) => {
 
     config['openaiApiKey'] = getOpenaiApiKey();
     config['ollamaApiUrl'] = getOllamaApiEndpoint();
+    config['lmStudioApiUrl'] = getLMStudioApiEndpoint();
     config['anthropicApiKey'] = getAnthropicApiKey();
     config['groqApiKey'] = getGroqApiKey();
     config['geminiApiKey'] = getGeminiApiKey();
@@ -74,6 +76,7 @@ router.post('/', async (req, res) => {
     },
     API_ENDPOINTS: {
       OLLAMA: config.ollamaApiUrl,
+      LMSTUDIO: config.lmStudioApiUrl,
     },
   };
 

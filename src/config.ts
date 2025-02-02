@@ -16,9 +16,10 @@ interface Config {
     ANTHROPIC: string;
     GEMINI: string;
   };
-  API_ENDPOINTS: {
-    SEARXNG: string;
+  API_ENDPOINTS: {  
     OLLAMA: string;
+    LMSTUDIO: string;
+    SEARXNG: string;
   };
 }
 
@@ -51,6 +52,8 @@ export const getSearxngApiEndpoint = () =>
 
 export const getOllamaApiEndpoint = () => loadConfig().API_ENDPOINTS.OLLAMA;
 
+export const getLMStudioApiEndpoint = () => loadConfig().API_ENDPOINTS.LMSTUDIO;
+
 export const updateConfig = (config: RecursivePartial<Config>) => {
   const currentConfig = loadConfig();
 
@@ -71,6 +74,27 @@ export const updateConfig = (config: RecursivePartial<Config>) => {
       config[key] = currentConfig[key];
     }
   }
+
+  /*
+export const updateConfig = (config: RecursivePartial<Config>) => {
+  const currentConfig = loadConfig();
+
+  // Merge existing config with new values
+  const mergedConfig: RecursivePartial<Config> = {
+    GENERAL: {
+      ...currentConfig.GENERAL,
+      ...config.GENERAL,
+    },
+    API_KEYS: {
+      ...currentConfig.API_KEYS,
+      ...config.API_KEYS,
+    },
+    API_ENDPOINTS: {
+      ...currentConfig.API_ENDPOINTS,
+      ...config.API_ENDPOINTS,
+    },
+  };
+*/
 
   fs.writeFileSync(
     path.join(__dirname, `../${configFileName}`),
